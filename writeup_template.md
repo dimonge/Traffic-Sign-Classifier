@@ -1,6 +1,6 @@
 #**Traffic Sign Recognition** 
 
-##Classifying Traffic sign using Convolution Neural networks
+## Classifying Traffic sign using Convolution Neural networks
 
 
 **Build a Traffic Sign Recognition Project**
@@ -14,30 +14,9 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-[//]: # (Image References)
-
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
-
-## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
-
----
-###Writeup / README
-
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
-
 You're reading it! and here is a link to my [Traffic Sign Classifier](https://github.com/dimonge/Traffic-Sign-Classifier/blob/master/Traffic_Sign_Classifier.ipynb)
 
-###Data Set Summary & Exploration
-
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+### Data Set Summary & Exploration
 
 I used the numpy library to calculate summary statistics of the traffic
 signs data set:
@@ -48,45 +27,27 @@ signs data set:
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-####2. Include an exploratory visualization of the dataset.
+#### Exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. The following table shows a sign image with the label value
+Here is an exploratory visualization of the data set. The following table shows images of signs with their respective label value.
 
-![Sign Image][./sign_image.png]
+![Sign Image](./sign_image.png)
 
-This helps to better understand the conresponding image with the label. The histgram below shows the amount of features per label in the training set. 
+This helps to better understand the corresponding image with the label. The histogram below shows the amount of features per label in the training set. 
 
-![Sign Image][./features_label_histogram.png]
+![Sign Image](./features_label_histogram.png)
 
-###Design and Test a Model Architecture
+#### Design and Test a Model Architecture
 
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+##### Preprocessing
 
-First Step, I converted the color images (depth = 3) to grayscale image (depth = 1) because...
+First Step, I converted the color images (depth = 3) to grayscale image (depth = 1). Here is an example of a traffic sign image before and after grayscaling.
 
-Here is an example of a traffic sign image before and after grayscaling.
+![Gray Scale Image](./grayscale_img.png)
 
-![Gray Scale Image][./grayscale_img.png]
+After that, I normalized the image data so that the image has a small mean value to improved the network performance on the dataset.
 
-
-
-
-As a last step, I normalized the image data because...
-
-
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
-
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+##### Model Architecture
 
 My final model consisted of the following layers:
 
@@ -106,9 +67,7 @@ My final model consisted of the following layers:
 |	Full Connected      | Output 43										|
 |						|												|
  
-
-
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+#### Model Training
 
 To train the model, I used the following parameters
 Optimizer = AdamOptimizer
@@ -119,29 +78,26 @@ mean = 0
 stddev = 0.1
 keep_prob = 0.5
 
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+
+#### Solution Approach
+I tried the following approach 
+1. Using the same LeNet architecture from the example, I got 90% accuracy. I changed the following hyper parameters
+  Depth = 1
+  Output = 43
+* Applied Dropout (0.5) to the first Fully Connected layer, I got 94% accuracy. Using the same params
+* Applied two dropout after the 1 and 2 second Fully Connected layer. I got 94.1% accuracy. 
+* Reducing the learning rate to 0.005 got 90% accuracy
+* Increasing the learning rate to 0.05 got 92% accuracy
+* Increasing the learning rate to 0.0075 got 89.1% accuracy
 
 My final model results were:
 * validation set accuracy of 94.6%
 * test set accuracy of 92.3%
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-  I applied the LeNet architecture with normalized data
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+### Test a Model on New Images
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
-
-###Test a Model on New Images
-
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
+#### Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are five German traffic signs that I found on the web:
 
