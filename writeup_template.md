@@ -1,4 +1,4 @@
-# **Traffic Sign Recognition** 
+# **Traffic Sign Classifier** 
 
 ## Classifying Traffic sign using Convolution Neural networks
 
