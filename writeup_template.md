@@ -104,10 +104,11 @@ Here are five German traffic signs that I found on the web:
 ![Gray Scale Image](./new_traffic_sign/3.png) ![80 km limit](./new_traffic_sign/80-limit.png) ![caution](./new_traffic_sign/caution.png) 
 ![Keep right](./new_traffic_sign/keep-right.png) ![Turn left ahead](./new_traffic_sign/turn-left-ahead.png)
 
+I resized the images to (32 x 32 x 3) and apply a grayscale to change the depth to 1 (new image size: 32 x 32 x 1). 
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 The softmax probability for the traffic signs are as follows
 ![Softmax](./softmax-prob.png)
 
-The model was only able to guess 1 out of the 5 traffic signs, which gives an accuracy of 20%. 
+The model was only able to guess 1 out of the 5 traffic signs, which gives an accuracy of 20%. This shows that our model is overfitting on the training set whose accuracy was 94.6% and test set whose accuracy was 92.3%. I will need more data to train the model to better recognise news variations of sign images.
